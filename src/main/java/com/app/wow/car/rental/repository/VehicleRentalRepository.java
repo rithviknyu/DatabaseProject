@@ -26,4 +26,6 @@ public interface VehicleRentalRepository extends JpaRepository<VehicleRental, Lo
             @Param("dis_id") Long disId
     );
 
+    @Query(value = "CALL GetVehicleRentalRegistrationById(:id);", nativeQuery = true)
+    VehicleRental vehicleRentalById(@Param("id") Long customerId);
 }

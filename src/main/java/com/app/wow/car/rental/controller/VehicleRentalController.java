@@ -1,6 +1,7 @@
 package com.app.wow.car.rental.controller;
 
 
+import com.app.wow.car.rental.model.Customer;
 import com.app.wow.car.rental.model.VehicleRental;
 import com.app.wow.car.rental.service.VehicleRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class VehicleRentalController {
     VehicleRentalService vehicleRentalService;
 
     @PostMapping(path = "/api/vehicleRegistration")
-    public ResponseEntity<Void> findCustomerById(@RequestBody VehicleRental vehicleRental){
+    public ResponseEntity<Void> addVehicleRegistration(@RequestBody VehicleRental vehicleRental){
         try {
             vehicleRentalService.addvehiclerental(vehicleRental);
             return ResponseEntity.ok().build(); // Return a 200 OK response without a body
@@ -23,5 +24,10 @@ public class VehicleRentalController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             // Return an appropriate error response - 500 Internal Server Error
         }
+    }
+
+    @GetMapping(path = "/api/vehicleRegistration/{id}")
+    public ResponseEntity<VehicleRental> getVehicleRegistration(@PathVariable("id") Long id){
+        return new ResponseEntity<>(vehicleRentalService.getVehicleRegistrationById(id), HttpStatus.OK);
     }
 }

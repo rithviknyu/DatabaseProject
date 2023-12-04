@@ -26,4 +26,8 @@ public class VehicleRentalService {
                 vehicleRental.disid
         );
     }
+
+    public VehicleRental getVehicleRegistrationById(Long id) {
+        return vehicleRentalRepository.vehicleRentalById(id);
+    }
 }
