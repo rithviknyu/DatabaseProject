@@ -15,7 +15,6 @@ public class Payment {
     @Id
     @Column(name = "methodid")
     public Long methodid;
-    @Id
     @Column(name = "invoiceid")
     public Long invoiceid;
     @Column(name = "pcardnum")
