@@ -122,6 +122,10 @@ public class VehicleRentalService {
             if (objList[8] != null) vehicle.setPickuplocid(Long.valueOf((Integer) objList[8]));
             if (objList[9] != null) vehicle.setDropofflocid(Long.valueOf((Integer) objList[9]));
             if (objList[10] != null) vehicle.setDisid(Long.valueOf((Integer) objList[10]));
+            if(objList[11]==null || (Long)objList[11]==0)
+                vehicle.setPayStatus(false);
+            else
+                vehicle.setPayStatus(true);
 
             vehicleServiceList.add(vehicle);
         }

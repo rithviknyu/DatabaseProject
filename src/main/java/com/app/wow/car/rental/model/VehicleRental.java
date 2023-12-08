@@ -38,6 +38,13 @@ public class VehicleRental {
         @Column(name = "disid")
         public Long disid;
 
+        public void setPayStatus(Boolean payStatus) {
+                this.payStatus = payStatus;
+        }
+
+        @Column(name = "payStatus")
+        public Boolean payStatus;
+
         public void setServiceid(Long serviceid) {
                 this.serviceid = serviceid;
         }
