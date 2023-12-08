@@ -61,7 +61,31 @@ public class VehicleRentalService {
     }
 
     public VehicleRental getVehicleRegistrationById(Long id) {
-        return vehicleRentalRepository.vehicleRentalById(id);
+
+        Object[] objList= (Object[])vehicleRentalRepository.vehicleRentalById(id);
+        VehicleRental vehicle = new VehicleRental();
+
+        if (objList[0] != null) vehicle.setServiceid((Long) objList[0]);
+
+        if (objList[1] != null) vehicle.setPickdate(((Timestamp) objList[1]).toLocalDateTime());
+        if (objList[2] != null) vehicle.setDropdate(((Timestamp) objList[2]).toLocalDateTime());
+
+        if (objList[3] != null) vehicle.setStartodo((BigDecimal) objList[3]);
+        if (objList[4] != null) vehicle.setEndodo((BigDecimal) objList[4]);
+
+        if (objList[5] != null) vehicle.setDlimit((Long) objList[5]);
+
+        if (objList[6] != null) vehicle.setVin((String) objList[6]);
+
+        if (objList[7] != null) vehicle.setCustid(Long.valueOf((Integer) objList[7]));
+        if (objList[8] != null) vehicle.setPickuplocid(Long.valueOf((Integer) objList[8]));
+        if (objList[9] != null) vehicle.setDropofflocid(Long.valueOf((Integer) objList[9]));
+        if (objList[10] != null) vehicle.setDisid(Long.valueOf((Integer) objList[10]));
+        vehicle.setPayStatus(false);
+
+
+
+        return vehicle;
     }
 
     public List<Vehicle> getVehicleList(Integer pickupId){
