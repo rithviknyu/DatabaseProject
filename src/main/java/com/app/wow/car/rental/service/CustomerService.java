@@ -11,7 +11,7 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    public Customer getCustomerById(Long id){
+    public Customer getCustomerById(Integer id){
         return customerRepository.getCustomerById(id);
     }
 }

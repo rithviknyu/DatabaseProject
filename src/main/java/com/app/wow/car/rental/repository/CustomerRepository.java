@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query(value = "CALL GET_CUST_BY_ID(:cust_id);", nativeQuery = true)
-    Customer getCustomerById(@Param("cust_id") Long customerId);
+    Customer getCustomerById(@Param("cust_id") Integer customerId);
 }

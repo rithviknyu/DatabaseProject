@@ -12,8 +12,9 @@ import lombok.Data;
 public class Office {
 
     @Id
-    @Column(name="locId")
+    @Column(name="locationid")
     Integer locId;
+    // change this to locId if its defined like that in ur db table
 
     @Column(name="street")
     String street;
@@ -27,23 +28,5 @@ public class Office {
     @Column(name="zipcode")
     String zipcode;
 
-    public void setLocId(Integer locId) {
-        this.locId = locId;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
+   String phoneno;
 }

@@ -16,7 +16,4 @@ public class IndividualCustomer extends  Customer {
     @Column(name = "insname") private String insuranceName;
     @Column(name = "inspnum") private String insuranceNumber;
 
-
-
-
 }

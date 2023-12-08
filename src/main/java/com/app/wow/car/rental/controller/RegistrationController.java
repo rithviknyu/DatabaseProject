@@ -1,4 +1,5 @@
 package com.app.wow.car.rental.controller;
+import com.app.wow.car.rental.dto.RegistrationRequest;
 import com.app.wow.car.rental.model.CorporateCustomer;
 import com.app.wow.car.rental.model.Customer;
 import com.app.wow.car.rental.model.IndividualCustomer;
@@ -16,11 +17,14 @@ public class RegistrationController {
 
 
     @PostMapping("/api/registration/individual")
-    public ResponseEntity<String> registerIndividualCustomer(@RequestBody IndividualCustomer customer) {
+    public ResponseEntity<String> registerIndividualCustomer(@RequestBody RegistrationRequest request) {
 
         try {
-            registrationService.registerCustomer(customer);
-            return ResponseEntity.ok("Customer registered successfully");
+            if(registrationService.registerCustomer(request)) {
+                return ResponseEntity.ok("Customer registered successfully");
+            }else {
+                return ResponseEntity.badRequest().body("Registration Failed");
+            }
         } catch (Exception e) {
             // Log the exception or handle it according to your needs
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -31,11 +35,14 @@ public class RegistrationController {
 
 
     @PostMapping("/api/registration/corporate")
-    public ResponseEntity<String> registerCorpCustomer(@RequestBody CorporateCustomer customer) {
+    public ResponseEntity<String> registerCorpCustomer(@RequestBody RegistrationRequest request) {
 
         try {
-            registrationService.registerCustomer(customer);
-            return ResponseEntity.ok("Customer registered successfully");
+            if(registrationService.registerCustomer(request)) {
+                return ResponseEntity.ok("Customer registered successfully");
+            }else {
+                return ResponseEntity.badRequest().body("Registration Failed");
+            }
         } catch (Exception e) {
             // Log the exception or handle it according to your needs
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

@@ -13,7 +13,7 @@ import lombok.Data;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long custid;
+    private Integer custid;
     private String street;
     @Column
     private String city;
@@ -25,8 +25,7 @@ public class Customer {
     private String phoneno;
     @Column
     private String emailid;
-    @Column
-    private String password;
+
 
 }
 
