@@ -23,10 +23,16 @@ public class PaymentService {
     public Invoice getInvoiceById(Long serviceId){
         Object[] list=(Object[])paymentRepository.getInvoiceById(serviceId);
         Invoice invoice=new Invoice();
-        invoice.setInvoiceId((Long)list[0]);
-        invoice.setServiceId((Long)list[1]);
-        invoice.setAmt((BigDecimal) list[2]);
-        if((Long)list[3]==0)
+        if (list[0] != null) {
+            invoice.setInvoiceId((Long) list[0]);
+        }
+        if (list[1] != null) {
+            invoice.setServiceId((Long) list[1]);
+        }
+        if (list[2] != null) {
+            invoice.setAmt((BigDecimal) list[2]);
+        }
+        if(list[3]==null || (Long)list[3]==0)
             invoice.setPayStatus(false);
         else
             invoice.setPayStatus(true);
