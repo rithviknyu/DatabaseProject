@@ -18,6 +18,7 @@ public class VehicleRentalController {
     @Autowired
     VehicleRentalService vehicleRentalService;
 
+    @CrossOrigin
     @PostMapping(path = "/api/vehicleRegistration")
     public ResponseEntity<Void> addVehicleRegistration(@RequestBody VehicleRental vehicleRental){
         try {
@@ -30,6 +31,7 @@ public class VehicleRentalController {
         }
     }
 
+    @CrossOrigin
     @PostMapping(path = "/api/update/vehicleRegistration")
     public ResponseEntity<Void> udpdateVehicleRegistration(@RequestBody VehicleRental vehicleRental){
         try {
