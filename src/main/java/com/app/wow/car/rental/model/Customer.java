@@ -3,20 +3,17 @@
 package com.app.wow.car.rental.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
-@Table(name = "PRS_CUSTOMER", schema = "wow")
+@Entity(name = "PRS_CUSTOMER2")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="custtype", discriminatorType = DiscriminatorType.STRING)
 @Data
 public class Customer {
     @Id
-    @Column(name = "custid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long custid;
-    @Column(name = "street")
     private String street;
     @Column
     private String city;
@@ -29,7 +26,7 @@ public class Customer {
     @Column
     private String emailid;
     @Column
-    private String custtype;
+    private String password;
 
 }
 
