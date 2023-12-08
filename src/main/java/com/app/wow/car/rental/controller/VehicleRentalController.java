@@ -99,4 +99,20 @@ public class VehicleRentalController {
         }
     }
 
+    @GetMapping(path = "/api/vehicleService/list/{custId}")
+    public ResponseEntity<List<VehicleRental>> getVehicleServiceList(@PathVariable("custId") Long custId){
+        try{
+            List<VehicleRental> vehicleServiceList=vehicleRentalService.getVehicleServiceList(custId);
+            if(vehicleServiceList!=null){
+                return new ResponseEntity<>(vehicleServiceList, HttpStatus.OK);
+            }
+            else
+                throw new Exception("Internal service error");
+        } catch (Exception e) {
+            // Log the exception or handle it according to your needs
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            // Return an appropriate error response - 500 Internal Server Error
+        }
+    }
+
 }
