@@ -1,5 +1,6 @@
 package com.app.wow.car.rental.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -42,6 +43,7 @@ public class VehicleRental {
                 this.payStatus = payStatus;
         }
 
+        @Nullable
         @Column(name = "payStatus")
         public Boolean payStatus;
 
