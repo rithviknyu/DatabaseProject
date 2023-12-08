@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -19,8 +20,8 @@ public interface VehicleRentalRepository extends JpaRepository<VehicleRental, Lo
             @Param("service_id") Long serviceId,
             @Param("pick_date") String pickDate,
             @Param("drop_date") String dropDate,
-            @Param("start_odo") Long startOdo,
-            @Param("end_odo") Long endOdo,
+            @Param("start_odo") BigDecimal startOdo,
+            @Param("end_odo") BigDecimal endOdo,
             @Param("d_limit") Long dLimit,
             @Param("cust_id") Long custId,
             @Param("vin") String vin,
@@ -34,8 +35,8 @@ public interface VehicleRentalRepository extends JpaRepository<VehicleRental, Lo
             @Param("service_id") Long serviceId,
             @Param("pick_date") String pickDate,
             @Param("drop_date") String dropDate,
-            @Param("start_odo") Long startOdo,
-            @Param("end_odo") Long endOdo,
+            @Param("start_odo") BigDecimal startOdo,
+            @Param("end_odo") BigDecimal endOdo,
             @Param("d_limit") Long dLimit,
             @Param("cust_id") Long custId,
             @Param("vin") String vin,
@@ -48,11 +49,15 @@ public interface VehicleRentalRepository extends JpaRepository<VehicleRental, Lo
     Object validateDiscountId(@Param("dis_id") Long disId);
 
     @Query(value = "CALL GetVehicleRentalRegistrationById(:id);", nativeQuery = true)
-    VehicleRental vehicleRentalById(@Param("id") Long customerId);
+    Object vehicleRentalById(@Param("id") Long customerId);
 
     @Query(value = "CALL GetVehicleList(:pickup_Id);", nativeQuery = true)
     Object[] getVehicleList(@Param("pickup_Id") Integer pickupId);
 
     @Query(value = "CALL GetOfficeList();", nativeQuery = true)
     Object[] getOfficeList();
+
+    @Query(value = "CALL GetVehicleServiceList(:cust_Id);", nativeQuery = true)
+    Object[] getVehicleServiceList(@Param("cust_Id") Long custId);
+
 }

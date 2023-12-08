@@ -15,6 +15,7 @@ public class PaymentController {
     @Autowired
     PaymentService paymentService;
 
+    @CrossOrigin
     @PostMapping(path = "/api/payment")
     public ResponseEntity<Void> addPayment(@RequestBody Payment payment){
         try {

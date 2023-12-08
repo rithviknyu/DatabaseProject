@@ -18,6 +18,7 @@ public class VehicleRentalController {
     @Autowired
     VehicleRentalService vehicleRentalService;
 
+    @CrossOrigin
     @PostMapping(path = "/api/vehicleRegistration")
     public ResponseEntity<Void> addVehicleRegistration(@RequestBody VehicleRental vehicleRental){
         try {
@@ -30,6 +31,7 @@ public class VehicleRentalController {
         }
     }
 
+    @CrossOrigin
     @PostMapping(path = "/api/update/vehicleRegistration")
     public ResponseEntity<Void> udpdateVehicleRegistration(@RequestBody VehicleRental vehicleRental){
         try {
@@ -90,6 +92,22 @@ public class VehicleRentalController {
             }
             else
                 throw new Exception("Internal Service Error");
+        } catch (Exception e) {
+            // Log the exception or handle it according to your needs
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            // Return an appropriate error response - 500 Internal Server Error
+        }
+    }
+
+    @GetMapping(path = "/api/vehicleService/list/{custId}")
+    public ResponseEntity<List<VehicleRental>> getVehicleServiceList(@PathVariable("custId") Long custId){
+        try{
+            List<VehicleRental> vehicleServiceList=vehicleRentalService.getVehicleServiceList(custId);
+            if(vehicleServiceList!=null){
+                return new ResponseEntity<>(vehicleServiceList, HttpStatus.OK);
+            }
+            else
+                throw new Exception("Internal service error");
         } catch (Exception e) {
             // Log the exception or handle it according to your needs
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
