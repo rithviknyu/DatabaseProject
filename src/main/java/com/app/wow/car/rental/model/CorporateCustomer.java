@@ -9,7 +9,7 @@ import java.math.BigInteger;
 @DiscriminatorValue("C")
 @Data
 public class CorporateCustomer extends Customer {
-    private String empid;
+    private BigInteger empid;
     private BigInteger regisnum;
 
 }

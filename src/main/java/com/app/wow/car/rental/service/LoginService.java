@@ -22,13 +22,14 @@ public class LoginService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Transactional
-    public boolean authenticateUser(String username, String rawPassword, PrsLogin.LoginType loginType) {
+    public String authenticateUser(String username, String rawPassword, PrsLogin.LoginType loginType) {
         String encryptedPassword = passwordEncoder.encode(rawPassword);
 
         PrsLogin prsLogin = prsLoginRepository.findAllByUsernameAndLoginType(username, loginType);
 
+        String userId = customerLoginTableRepository.findByUsername(prsLogin.getUsername());
+        System.out.println(userId);
 
-
-        return null != prsLogin && passwordEncoder.matches(rawPassword, prsLogin.getPassword());
+        return userId;
     }
 }

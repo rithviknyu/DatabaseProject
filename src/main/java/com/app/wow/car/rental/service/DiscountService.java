@@ -36,4 +36,9 @@ public class DiscountService {
         }
         return disList;
     }
+
+    public boolean deleteDiscount(int disid) {
+        discountRepository.deleteDiscount(disid);
+        return true;
+    }
 }

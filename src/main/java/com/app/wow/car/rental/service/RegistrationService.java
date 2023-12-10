@@ -6,6 +6,7 @@ import com.app.wow.car.rental.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,14 +50,23 @@ public class RegistrationService {
                 CorporateCustomer corporateCustomer = modelMapper.map(request, CorporateCustomer.class);
                 // Check the type of customer and cast to the appropriate class
                 System.out.println("Saving corporate customer.");
-                CorporateCustomer corpCust = corporateCustomerRepository.save(corporateCustomer);
-                customer = customerRepository.findById(corpCust.getCustid()).get();
+                int corpCust = corporateCustomerRepository.registerCorporateCustomer(corporateCustomer.getCustid(), corporateCustomer.getEmpid(),
+                        corporateCustomer.getRegisnum(),corporateCustomer.getStreet(),
+                        corporateCustomer.getCity(), corporateCustomer.getState(), corporateCustomer.getZipcode(), corporateCustomer.getPhoneno(),
+                        corporateCustomer.getEmailid(),"C");
+                customer = customerRepository.findById(corpCust).get();
 
             } else {
                 IndividualCustomer individualCustomer = modelMapper.map(request, IndividualCustomer.class);
                 System.out.println("Saving individual customer.");
-                IndividualCustomer indvCust = individualCustomerRepository.save(individualCustomer);
-                customer = customerRepository.findById(indvCust.getCustid()).get();
+                int custId = individualCustomerRepository.registerIndividualCustomer(0,
+                        individualCustomer.getFname(), individualCustomer.getMname(), individualCustomer.getLname(), individualCustomer.getDrivingLicenseNumber(),
+                        individualCustomer.getInsuranceName(), individualCustomer.getInsuranceNumber(), individualCustomer.getStreet(),
+                        individualCustomer.getCity(), individualCustomer.getState(), individualCustomer.getZipcode(), individualCustomer.getPhoneno(),
+                        individualCustomer.getEmailid(),"I");
+
+                System.out.println("done");
+                customer = customerRepository.findById(custId).get();
             }
 
             PrsLogin prsLogin = new PrsLogin();
@@ -68,11 +78,12 @@ public class RegistrationService {
             CustomerLogin customerLogin = new CustomerLogin();
             customerLogin.setPrsCustomer(customer);
             customerLogin.setUsername(request.getUsername());
-           // customerLogin.setPrsLogin(prsLogindb);
+            // customerLogin.setPrsLogin(prsLogindb);
             prsCustomerLoginTableRepository.save(customerLogin);
 
 
         }catch (Exception e){
+            e.printStackTrace();
             return false;
         }
 
