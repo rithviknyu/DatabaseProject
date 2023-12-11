@@ -64,4 +64,9 @@ public interface VehicleRentalRepository extends JpaRepository<VehicleRental, Lo
     @Query(value = "CALL GetVehicleServiceList(:cust_Id);", nativeQuery = true)
     Object[] getVehicleServiceList(@Param("cust_Id") Long custId);
 
+    @Query(value = "CALL GetEmployeePanelVehicleRentalList();", nativeQuery = true)
+    Object[] getVehicleServiceEList();
+
+    @Query(value = "CALL EmployeeDeleteVehicleRental(:service_id);", nativeQuery = true)
+    void deleteVehicleServiceE(@Param("service_id") Long serviceId);
 }
