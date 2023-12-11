@@ -1,17 +1,16 @@
 package com.app.wow.car.rental.controller;
 
 
-import com.app.wow.car.rental.model.Customer;
-import com.app.wow.car.rental.model.Office;
-import com.app.wow.car.rental.model.Vehicle;
-import com.app.wow.car.rental.model.VehicleRental;
+import com.app.wow.car.rental.model.*;
 import com.app.wow.car.rental.service.VehicleRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class VehicleRentalController {
@@ -115,4 +114,12 @@ public class VehicleRentalController {
         }
     }
 
+    @GetMapping(path ="/api/vehiclestats")
+    public ResponseEntity<List<VehicleStat>> getVehicleStats() {
+        try {
+            return new ResponseEntity<>(vehicleRentalService.getVehicleStats(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

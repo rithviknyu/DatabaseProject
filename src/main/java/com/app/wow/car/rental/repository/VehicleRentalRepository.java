@@ -4,6 +4,7 @@ package com.app.wow.car.rental.repository;
 import com.app.wow.car.rental.model.Customer;
 import com.app.wow.car.rental.model.Vehicle;
 import com.app.wow.car.rental.model.VehicleRental;
+import com.app.wow.car.rental.model.VehicleStat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -64,4 +66,6 @@ public interface VehicleRentalRepository extends JpaRepository<VehicleRental, Lo
     @Query(value = "CALL GetVehicleServiceList(:cust_Id);", nativeQuery = true)
     Object[] getVehicleServiceList(@Param("cust_Id") Long custId);
 
+    @Query(value = "CALL GetVehicleStat();", nativeQuery = true)
+    Object[] findVehicleStatsByModel();
 }

@@ -3,18 +3,17 @@ package com.app.wow.car.rental.service;
 import com.app.wow.car.rental.model.Office;
 import com.app.wow.car.rental.model.Vehicle;
 import com.app.wow.car.rental.model.VehicleRental;
+import com.app.wow.car.rental.model.VehicleStat;
 import com.app.wow.car.rental.repository.VehicleRentalRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleRentalService {
@@ -154,5 +153,19 @@ public class VehicleRentalService {
             vehicleServiceList.add(vehicle);
         }
         return vehicleServiceList;
+    }
+
+    public List<VehicleStat> getVehicleStats() {
+        Object[] data = vehicleRentalRepository.findVehicleStatsByModel();
+        ArrayList<VehicleStat> listStats = new ArrayList<>();
+        for(Object obj: data){
+            Object[] objList=(Object[])obj;
+            VehicleStat vs = new VehicleStat();
+            vs.setModel((String) objList[0]);
+            vs.setCount((Long) objList[1]);
+            listStats.add(vs);
+        }
+
+        return listStats;
     }
 }

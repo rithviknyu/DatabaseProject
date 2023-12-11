@@ -99,3 +99,9 @@ BEGIN
 
     select disid from prs_discount where disid=dis_id;
 END
+
+
+CREATE PROCEDURE `GetVehicleStat`()
+BEGIN
+	select wow.prs_vehicle.model, count(*) as count from wow.prs_rental_service left join wow.prs_vehicle on wow.prs_rental_service.vin=wow.prs_vehicle.vin group by wow.prs_vehicle.model order by count desc  ;
+END
