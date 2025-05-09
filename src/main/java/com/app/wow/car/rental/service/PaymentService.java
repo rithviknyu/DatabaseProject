@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 public class PaymentService {
@@ -17,25 +18,18 @@ public class PaymentService {
     PaymentRepository paymentRepository;
 
     public void addPayment(Payment payment){
-        paymentRepository.addpayment(payment.invoiceid, payment.methodid, payment.pcardnum);
+        paymentRepository.save(payment);
     }
 
     public Invoice getInvoiceById(Long serviceId){
-        Object[] list=(Object[])paymentRepository.getInvoiceById(serviceId);
-        Invoice invoice=new Invoice();
-        if (list[0] != null) {
-            invoice.setInvoiceId((Long) list[0]);
+        Optional<Payment> payment= paymentRepository.findByInvoiceid(serviceId);
+        Invoice invoice = new Invoice();
+        if(payment.isPresent()){
+            Payment payment1 = payment.get();
+            invoice.setInvoiceId(payment1.getInvoiceid());
+            invoice.setServiceId(payment1.getMethodid());
+            // Amount and status is pending
         }
-        if (list[1] != null) {
-            invoice.setServiceId((Long) list[1]);
-        }
-        if (list[2] != null) {
-            invoice.setAmt((BigDecimal) list[2]);
-        }
-        if(list[3]==null || (Long)list[3]==0)
-            invoice.setPayStatus(false);
-        else
-            invoice.setPayStatus(true);
         return invoice;
     }
 }

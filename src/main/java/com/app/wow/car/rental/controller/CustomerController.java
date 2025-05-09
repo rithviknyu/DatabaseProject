@@ -17,6 +17,6 @@ public class CustomerController {
 
     @GetMapping(path = "/api/customer/{id}")
     public ResponseEntity<Customer> findCustomerById(@PathVariable("id") Integer id){
-        return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.getCustomerById(id),HttpStatus.OK);
     }
 }

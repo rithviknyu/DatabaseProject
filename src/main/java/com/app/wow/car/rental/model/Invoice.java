@@ -9,7 +9,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "PRS_INVOICE", schema = "wow")
+@Table(name = "PRS_INVOICE")
 @Data
 public class Invoice {
     @Id

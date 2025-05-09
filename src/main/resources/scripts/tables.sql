@@ -1,4 +1,4 @@
-CREATE TABLE `prs_login` (
+/*CREATE TABLE `prs_login` (
   `username` varchar(50) NOT NULL,
   `password` varchar(225) DEFAULT NULL,
   `login_type` enum('CL','EL') DEFAULT NULL,
@@ -22,3 +22,4 @@ CREATE TABLE `prs_employeelogintable` (
   CONSTRAINT `prs_employeelogintable_ibfk_1` FOREIGN KEY (`username`) REFERENCES `prs_login` (`username`),
   CONSTRAINT `prs_employeelogintable_ibfk_2` FOREIGN KEY (`LocationId`) REFERENCES `prs_office_location` (`locationid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+*

@@ -12,6 +12,6 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
     public Customer getCustomerById(Integer id){
-        return customerRepository.getCustomerById(id);
+        return customerRepository.findByCustid(id).orElse(null);
     }
 }

@@ -7,9 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    @Query(value = "CALL GET_CUST_BY_ID(:cust_id);", nativeQuery = true)
-    Customer getCustomerById(@Param("cust_id") Integer customerId);
+    @Query
+    Optional<Customer> findByCustid(Integer custid);
+
+
 }

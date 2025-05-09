@@ -11,19 +11,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    @Query(value = "CALL addPayment(:invoice_id, :method_id, :p_card_num);", nativeQuery = true)
-    public void addpayment(
-            @Param("invoice_id") Long invoiceId,
-            @Param("method_id") Long methodId,
-            @Param("p_card_num") String pCardNum
-    );
+     Optional<Payment> findByInvoiceid(Long invoiceid);
 
-    @Query(value = "CALL GetInvoiceById(:service_Id);", nativeQuery = true)
-    public Object getInvoiceById(
-            @Param("service_Id") Long serviceId
-    );
+
 }

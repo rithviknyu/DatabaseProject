@@ -8,7 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PRS_PMETHOD_INVOICE", schema = "wow")
+@Table(name = "PRS_PMETHOD_INVOICE")
 @Data
 public class Payment {
 

@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "PRS_VEHICLE", schema = "wow")
+@Table(name = "PRS_VEHICLE")
 @Data
 public class Vehicle {
 
